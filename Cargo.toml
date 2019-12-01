@@ -1,0 +1,10 @@
+[package]
+name = "advent_of_code_2019_twigoftilia"
+version = "0.1.0"
+authors = ["mattias"]
+edition = "2018"
+
+[dependencies]
+regex = "1"
+strum = "0.16.0"
+strum_macros = "0.16.0"
