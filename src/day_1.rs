@@ -1,8 +1,9 @@
 use crate::util;
 
-pub fn solve() {
-    let v = util::integer_file_to_vector("input/day-1.txt");
+static DAY_1_INPUT: &str = include_str!(r"../input/day-1.txt");
 
+pub fn solve() {
+    let v = util::integer_file_buf_to_vector(DAY_1_INPUT);
     println!("Day 1 answers");
     print!(" first puzzle: ");
     println!("{}", solve_first(&v));

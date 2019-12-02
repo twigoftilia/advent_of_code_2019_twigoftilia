@@ -28,14 +28,14 @@ will run all puzzles done.
 
 ## Status
 
-current: 2
+current: 4
 goal: 15
 max: 50
 
 Days
 
 * 1 first & second done
-* 2
+* 2 first & second done
 * 3
 * 4
 * 5
