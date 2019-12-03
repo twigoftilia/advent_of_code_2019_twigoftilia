@@ -36,3 +36,8 @@ pub fn integer_file_buf_to_vector(input: &str) -> Vec<i32> {
         .map(|line| line.trim().parse().expect("Not an integer"))
         .collect()
 }
+
+// Returns a vector of trimmed strings with row content
+pub fn rows_to_vector(input: &str) -> Vec<&str> {
+    input.lines().map(|line| line.trim()).collect()
+}
