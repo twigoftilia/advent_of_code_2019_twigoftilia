@@ -29,13 +29,13 @@ will run all puzzles done.
 ## Status
 
 Personal goal: 15 stars (of max 50)
-current: 5
+current: 6
 
 Days
 
 * 1     Part 1 & 2
 * 2     Part 1 & 2
-* 3     Part 1
+* 3     Part 1 & 2
 * 4
 * 5
 * 6
