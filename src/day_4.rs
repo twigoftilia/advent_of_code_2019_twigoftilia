@@ -111,7 +111,7 @@ mod tests {
         // let (a1, a2) = solve_both(123_456, 123_467);
         // assert_eq!(a1, 1);
 
-        let (a1, a2) = solve_both(367899, 367899);
+        let (a1, _a2) = solve_both(367899, 367899);
         assert_eq!(a1, 1);
     }
 }
