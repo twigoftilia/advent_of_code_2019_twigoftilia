@@ -38,7 +38,7 @@ Days
 * 3     Part 1 & 2
 * 4     Part 1 & 2
 * 5     Part 1 & 2
-* 6     Part 1
+* 6     Part 1 & 2
 * 7
 * 8
 * 9

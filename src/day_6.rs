@@ -6,9 +6,13 @@ static DAY_6_INPUT: &str = include_str!(r"../input/day-6.txt");
 
 pub fn solve() {
     let v = util::rows_to_vector(DAY_6_INPUT);
+    let o = orbit_nodes(&v);
     println!("Day 6  answers");
     print!(" first puzzle: ");
-    println!("{}", solve_first(&v));
+    println!("{}", solve_first(&o));
+
+    print!(" second puzzle: ");
+    println!("{}", solve_second(&o));
 }
 
 #[derive(Debug)]
@@ -17,14 +21,13 @@ struct OrbitNode {
     kiddos: Vec<String>,
 }
 
-fn solve_first(input: &[&str]) -> usize {
+fn orbit_nodes(input: &[&str]) -> HashMap<String, OrbitNode> {
     let mut orbit_nodes: HashMap<String, OrbitNode> = HashMap::new();
     let re = Regex::new(r"^(\w+)\)(\w+)$").unwrap();
     for s in input {
         let caps = re.captures(s);
         if let Some(caps) = caps {
-            let base = &caps[1];
-            let satelite = &caps[2];
+            let (base, satelite) = (&caps[1], &caps[2]);
 
             if let Some(s_node) = orbit_nodes.get_mut(satelite) {
                 s_node.orbits = Some(base.to_owned());
@@ -49,22 +52,10 @@ fn solve_first(input: &[&str]) -> usize {
             panic!("Can't parse line: {}", s);
         }
     }
+    orbit_nodes
+}
 
-    let mut start_nodes = vec![];
-
-    for (name, orbit_node) in &orbit_nodes {
-        if orbit_node.orbits == Option::None {
-            start_nodes.push(String::from(name));
-        }
-    }
-    let mut orbits = 0;
-
-    for start_node in start_nodes {
-        {
-            orbits += get_orbits(&orbit_nodes, start_node, 0);
-        }
-    }
-
+fn solve_first(orbit_nodes: &HashMap<String, OrbitNode>) -> i32 {
     fn get_orbits(
         orbit_nodes: &HashMap<String, OrbitNode>,
         node_key: String,
@@ -85,7 +76,55 @@ fn solve_first(input: &[&str]) -> usize {
         }
         my_count + underling_counts
     }
-    orbits as usize
+    get_orbits(&orbit_nodes, String::from("COM"), 0)
+}
+
+fn solve_second(orbit_nodes: &HashMap<String, OrbitNode>) -> i32 {
+    fn get_path_to_from_com(
+        orbit_nodes: &HashMap<String, OrbitNode>,
+        target_node_name: String,
+    ) -> Vec<String> {
+        let mut path = vec![];
+
+        let mut current_node_name = String::from(&target_node_name);
+
+        // dbg!(&current_node_name);
+
+        loop {
+            let current_node = orbit_nodes.get(&current_node_name).unwrap();
+            path.push(String::from(&current_node_name));
+
+            // dbg!(&current_node);
+
+            if let Some(parent_name) = &current_node.orbits {
+                // dbg!(&current_node);
+                current_node_name = String::from(parent_name);
+            } else {
+                break;
+            }
+            //path.push(String::new())
+        }
+        path.reverse();
+        path
+    }
+
+    let you_path = get_path_to_from_com(&orbit_nodes, String::from("YOU"));
+    let santa_path = get_path_to_from_com(&orbit_nodes, String::from("SAN"));
+
+    let mut idx = 0;
+    //   dbg!(&you_path, &santa_path);
+
+    let last_shared_idx = loop {
+        //       dbg!(you_path.get(idx), santa_path.get(idx));
+        if you_path.get(idx) == santa_path.get(idx) {
+            idx += 1;
+        } else {
+            break idx as i32;
+        }
+    };
+    //   dbg!(last_shared_idx);
+
+    you_path.len() as i32 + santa_path.len() as i32 - 2 * last_shared_idx - 2 // don't count santa or you so remove 2
 }
 
 #[cfg(test)]
@@ -108,6 +147,28 @@ mod tests {
         K)L";
 
         let v = util::rows_to_vector(i);
-        assert_eq!(solve_first(&v), 42);
+        let o = orbit_nodes(&v);
+        assert_eq!(solve_first(&o), 42);
+    }
+
+    #[test]
+    fn test_cases_second() {
+        // provided examples
+        let i = "    COM)B
+    B)C
+    C)D
+    D)E
+    E)F
+    B)G
+    G)H
+    D)I
+    E)J
+    J)K
+    K)L
+    K)YOU
+    I)SAN";
+        let v = util::rows_to_vector(i);
+        let o = orbit_nodes(&v);
+        assert_eq!(solve_second(&o), 4);
     }
 }
