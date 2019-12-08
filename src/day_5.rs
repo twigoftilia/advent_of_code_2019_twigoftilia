@@ -5,7 +5,7 @@ static DAY_5_PROGRAM_INPUT: &str = include_str!(r"../input/day-5.txt");
 pub fn solve() {
     let mut v = util::parse_string_of_ints_to_vec(DAY_5_PROGRAM_INPUT);
 
-    println!("Day 2 answers");
+    println!("Day 5 answers");
     print!(" first puzzle: ");
     println!("{}", solve_first(&mut v));
 

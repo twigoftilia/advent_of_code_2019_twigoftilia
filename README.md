@@ -29,7 +29,7 @@ will run all puzzles done.
 ## Status
 
 Personal goal: 15 stars (of max 50)
-current: 11
+current: 14
 
 Days
 
@@ -39,7 +39,7 @@ Days
 * 4     Part 1 & 2
 * 5     Part 1 & 2
 * 6     Part 1 & 2
-* 7
+* 7     Part 1 & 2
 * 8
 * 9
 * 10
@@ -63,3 +63,9 @@ Days
 ### Notes to self
 
 nothing noteworty so far
+
+
+ * cargo fmt
+ * cargo lippy
+ * RUST_BACKTRACE=1 cargo run 
+ * RUST_BACKTRACE=1 cargo test -- --nocapture
