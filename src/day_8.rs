@@ -6,8 +6,8 @@ pub fn solve() {
     println!("Day 8 answers");
     print!(" first puzzle: ");
     println!("{}", solve_first(DAY_8_INPUT, 25, 6));
-    // print!(" second puzzle: ");
-    // println!("{}", solve_second(&v));
+    print!(" second puzzle: ");
+    solve_second(DAY_8_INPUT, 25, 6);
 }
 
 fn solve_first(input: &str, width: i32, height: i32) -> usize {
@@ -48,8 +48,59 @@ fn solve_first(input: &str, width: i32, height: i32) -> usize {
     ones_in_layer * twos_in_layer
 }
 
-// fn solve_second(ints: &[i32]) -> i32 {
-// }
+fn solve_second(input: &str, width: usize, height: usize) -> usize {
+    let layer_size = width * height;
+
+    let data: Vec<u8> = input
+        .chars()
+        .filter_map(|x| x.to_digit(10))
+        .map(|x| (x as u8))
+        .collect();
+    // dbg!(&data);
+
+    let no_of_layers = data.len() / layer_size;
+    let mut min_no_of_zeros = 0;
+    let mut min_layer = Option::None;
+
+    for current_row in 0..height {
+        println!();
+        'next_pixel: for current_column in 0..width {
+            let layer_offset = current_row * width + current_column;
+
+            for current_layer in 0..no_of_layers {
+                match data[current_layer * layer_size + layer_offset] {
+                    0 => {
+                        print!(" ");
+                        continue 'next_pixel;
+                    }
+                    1 => {
+                        print!("*");
+                        continue 'next_pixel;
+                    }
+                    _ => {}
+                }
+            }
+            print!("X");
+            panic!("Corrupt data detected");
+        }
+    }
+
+    for current_layer_no in 0..no_of_layers {
+        let layer_offset = (current_layer_no * layer_size) as usize;
+        let layer_slice = &data[layer_offset..(layer_offset + layer_size as usize)];
+        let zeros_in_layer = bytecount::count(layer_slice, 0);
+
+        if min_layer.is_none() || zeros_in_layer < min_no_of_zeros {
+            min_layer = Some(layer_slice);
+            min_no_of_zeros = zeros_in_layer;
+        }
+    }
+    let layer_slice = min_layer.unwrap();
+    let ones_in_layer = bytecount::count(layer_slice, 1);
+    let twos_in_layer = bytecount::count(layer_slice, 2);
+    // dbg!(layer_slice, ones_in_layer, twos_in_layer);
+    ones_in_layer * twos_in_layer
+}
 
 #[cfg(test)]
 mod tests {
@@ -75,7 +126,8 @@ mod tests {
         assert_eq!(s, 4);
     }
 
-    // #[test]
-    // fn test_cases_second() {
-    // }
+    #[test]
+    fn test_cases_second() {
+        solve_second("0222112222120000", 2, 2);
+    }
 }
