@@ -29,7 +29,7 @@ will run all puzzles done.
 ## Status
 
 Personal goal: 15 stars (of max 50)
-current: 14
+current: 15
 
 Days
 
@@ -40,7 +40,7 @@ Days
 * 5     Part 1 & 2
 * 6     Part 1 & 2
 * 7     Part 1 & 2
-* 8
+* 8     Part 1
 * 9
 * 10
 * 11
@@ -62,8 +62,7 @@ Days
 
 ### Notes to self
 
-nothing noteworty so far
-
+Personal goal reached at day 8! Been fun. Now I really should take a break, do other stuff some evenings. And maybe return for more like next weekend if I got an urge :)
 
  * cargo fmt
  * cargo lippy
