@@ -84,6 +84,7 @@ fn solve_second(input: &str, width: usize, height: usize) -> usize {
             panic!("Corrupt data detected");
         }
     }
+    println!();
 
     for current_layer_no in 0..no_of_layers {
         let layer_offset = (current_layer_no * layer_size) as usize;

@@ -1,3 +1,4 @@
+use std::fmt::Debug;
 // Takes a csv row of integers and returns a vector with corresponding values
 // Chars may or may not be prefixed with sign (+ or -).
 // Whitespaces are ignored
@@ -5,25 +6,17 @@
 // Empty string -> empty vector
 //
 #[allow(dead_code)]
-pub fn parse_string_of_ints_to_vec(s: &str) -> Vec<i32> {
+pub fn parse_string_of_ints_to_vec<T>(s: &str) -> Vec<T>
+where
+    T: std::str::FromStr,
+    <T as std::str::FromStr>::Err: Debug,
+{
     let s = s.trim();
 
     if s.is_empty() {
         return Vec::new();
     }
 
-    s.split(',')
-        .map(|x| x.trim().parse().expect("Not an integer"))
-        .collect()
-}
-
-#[allow(dead_code)]
-pub fn parse_string_of_ints_to_usize_vec(s: &str) -> Vec<usize> {
-    let s = s.trim();
-
-    if s.is_empty() {
-        return Vec::new();
-    }
     s.split(',')
         .map(|x| x.trim().parse().expect("Not an integer"))
         .collect()

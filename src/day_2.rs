@@ -6,7 +6,7 @@ static DAY_2_INPUT_1_VERB: usize = 2;
 static DAY_2_EXPECTED_2: usize = 19_690_720;
 
 pub fn solve() {
-    let mut v = util::parse_string_of_ints_to_usize_vec(DAY_2_PROGRAM_INPUT);
+    let mut v = util::parse_string_of_ints_to_vec(DAY_2_PROGRAM_INPUT);
 
     println!("Day 2 answers");
     print!(" first puzzle: ");
@@ -28,7 +28,7 @@ fn solve_first(program: &mut [usize], noun: usize, verb: usize) -> usize {
 }
 
 fn solve_second() -> usize {
-    let program_template = util::parse_string_of_ints_to_usize_vec(DAY_2_PROGRAM_INPUT);
+    let program_template = util::parse_string_of_ints_to_vec(DAY_2_PROGRAM_INPUT);
 
     for n in 0..100 {
         for v in 0..100 {

@@ -29,7 +29,7 @@ will run all puzzles done.
 ## Status
 
 Personal goal: 15 stars (of max 50)
-current: ** 16 **
+current: ** 18 **
 
 Days
 
@@ -41,7 +41,7 @@ Days
 * 6     Part 1 & 2
 * 7     Part 1 & 2
 * 8     Part 1 & 2
-* 9
+* 9     Part 1 & 2
 * 10
 * 11
 * 12
@@ -65,6 +65,12 @@ Days
 Personal goal reached at day 8! Been fun. Now I really should take a break, do other stuff during some evenings. And maybe return for more like next weekend if I got an urge :)
 
   cargo fmt
-  cargo lippy
-  RUST_BACKTRACE=1 cargo run 
+
+
+  cargo clippy
+
+
+  RUST_BACKTRACE=1 cargo run
+
+  
   RUST_BACKTRACE=1 cargo test -- --nocapture

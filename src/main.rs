@@ -8,7 +8,9 @@ mod day_5;
 mod day_6;
 mod day_7;
 mod day_8;
+mod day_9;
 
+mod int_computer;
 mod util;
 
 fn main() {
@@ -21,4 +23,5 @@ fn main() {
     day_6::solve();
     day_7::solve();
     day_8::solve();
+    day_9::solve();
 }
